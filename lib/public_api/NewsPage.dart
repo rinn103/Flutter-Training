@@ -14,15 +14,15 @@ class _NewsPageState extends State<NewsPage> {
   List _articles = [];
   String? _error;
 
-  static const String _apiKey =
-      'c0652d76d56d43ada90a841804f0a430'; // <-- Replace this
-  static const String _base = 'https://newsapi.org/v2/top-headlines';
-
   @override
   void initState() {
     super.initState();
     _fetchNews();
   }
+
+  static const String _apiKey =
+      'c0652d76d56d43ada90a841804f0a430'; // <-- Replace this
+  static const String _base = 'https://newsapi.org/v2/top-headlines';
 
   Future<void> _fetchNews() async {
     setState(() {
@@ -33,7 +33,6 @@ class _NewsPageState extends State<NewsPage> {
     final uri = Uri.parse(
       '$_base?country=us&category=technology&apiKey=$_apiKey',
     );
-
     try {
       final resp = await http.get(uri).timeout(const Duration(seconds: 15));
 
@@ -64,22 +63,10 @@ class _NewsPageState extends State<NewsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Top Tech News',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.1,
-          ),
+          "Top Tech News",
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFFED6C02),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: _fetchNews,
-            icon: const Icon(Icons.refresh),
-            color: Colors.white,
-          ),
-        ],
+        backgroundColor: Colors.orange,
       ),
       body:
           _loading
@@ -91,50 +78,38 @@ class _NewsPageState extends State<NewsPage> {
                 itemBuilder: (context, index) {
                   final article = _articles[index];
                   final image = article['urlToImage'];
+
                   return Card(
                     margin: const EdgeInsets.all(8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
                     child: ListTile(
                       leading:
                           image != null
-                              ? ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  image,
-                                  width: 60,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                  errorBuilder:
-                                      (context, _, __) =>
-                                          const Icon(Icons.image_not_supported),
-                                ),
+                              ? Image.network(
+                                image,
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
                               )
                               : const Icon(Icons.article, size: 40),
-                      title: Text(
-                        article['title'] ?? 'No title',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(article['source']['name'] ?? ''),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder:
-                              (_) => AlertDialog(
-                                title: Text(article['title'] ?? ''),
-                                content: Text(
-                                  article['description'] ?? 'No description',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    child: const Text('Close'),
-                                    onPressed: () => Navigator.pop(context),
+                      title: Text(article['title'] ?? 'No title'),
+                      subtitle: Text(article['source']?['name'] ?? 'Unknown'),
+                      onTap:
+                          () => showDialog(
+                            context: context,
+                            builder:
+                                (_) => AlertDialog(
+                                  title: Text(article['title'] ?? ''),
+                                  content: Text(
+                                    article['description'] ?? 'No details',
                                   ),
-                                ],
-                              ),
-                        );
-                      },
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('Close'),
+                                    ),
+                                  ],
+                                ),
+                          ),
                     ),
                   );
                 },

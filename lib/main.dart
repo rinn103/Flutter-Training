@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app_state.dart';
 import 'auth/LoginPage.dart';
 import 'auth/loading_screen.dart';
 
@@ -13,7 +12,10 @@ import 'widgets/exercise_1.dart';
 import 'widgets/stack.dart';
 import 'widgets/wrap.dart';
 
-void main() => runApp(const AppState());
+import 'token_api/git.dart';
+import 'public_api/NewsPage.dart';
+
+void main() => runApp(const App());
 
 class App extends StatelessWidget {
   const App({super.key});
