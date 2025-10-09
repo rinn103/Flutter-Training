@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:svg/screens/svg.dart';
 import 'app_state.dart';
-import '../screens/LoginPage.dart';
-import '../screens/loading_screen.dart';
+import 'auth/LoginPage.dart';
+import 'auth/loading_screen.dart';
+
+import 'widgets/center_text.dart';
+import 'widgets/column.dart';
+import 'widgets/container.dart';
+import 'widgets/icon.dart';
+import 'widgets/exercise_2.dart';
+import 'widgets/listTile.dart';
+import 'widgets/exercise_1.dart';
+import 'widgets/stack.dart';
+import 'widgets/wrap.dart';
 
 void main() => runApp(const AppState());
 

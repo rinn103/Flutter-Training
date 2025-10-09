@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../screens/HomePage.dart';
-import '../screens/RegisterPage.dart';
-import '../../app_state.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../auth/HomePage.dart';
+import '../auth/ForgotPasswordPage.dart';
+import '../auth/RegisterPage.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// Login page
 class LoginPage extends StatefulWidget {
   final String? prefilledEmail;
   final String? prefilledName;
@@ -18,36 +18,45 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _form = GlobalKey<FormState>();
-  late final TextEditingController _email;
+  final _email = TextEditingController();
   final _password = TextEditingController();
+  bool _loading = false;
 
   @override
   void initState() {
     super.initState();
-    _email = TextEditingController(text: widget.prefilledEmail ?? '');
+    _email.text = widget.prefilledEmail ?? '';
   }
 
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
-
-  void _submit() {
+  Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
-    final app = AppState.of(context);
-    final user = app.login(email: _email.text, password: _password.text);
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Invalid email or password")),
+
+    setState(() => _loading = true);
+
+    final prefs = await SharedPreferences.getInstance();
+    final savedEmail = prefs.getString('email');
+    final savedPassword = prefs.getString('password');
+    final savedUsername = prefs.getString('username');
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (_email.text.trim() == savedEmail && _password.text == savedPassword) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Login successful!')));
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => HomePage(username: savedUsername ?? 'User'),
+        ),
       );
-      return;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid email or password')),
+      );
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => HomePage(user: user)),
-    );
+    setState(() => _loading = false);
   }
 
   @override
@@ -75,11 +84,11 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             const SizedBox(height: 30),
-            // Image.asset(
-            //   'lib/assets/fgv_logo.png', //  your image here
-            //   height: 180,
-            //   fit: BoxFit.contain,
-            // ),
+            Image.asset(
+              'lib/assets/fgv_logo.png', //  your image here
+              height: 180,
+              fit: BoxFit.contain,
+            ),
             //  SvgPicture.asset(
             //   'lib/assets/tree.svg',
             //   width: 140,
@@ -91,12 +100,12 @@ class _LoginPageState extends State<LoginPage> {
             //         child: CircularProgressIndicator(),
             //       ),
             // ),
-            Lottie.asset(
-              'lib/assets/lottie/test.json',
-              width: 200,
-              height: 200,
-              repeat: false,
-            ),
+            // Lottie.asset(
+            //   'lib/assets/lottie/test.json',
+            //   width: 200,
+            //   height: 200,
+            //   repeat: false,
+            // ),
             const SizedBox(height: 20),
             Form(
               key: _form,
@@ -127,7 +136,19 @@ class _LoginPageState extends State<LoginPage> {
                         (v) =>
                             (v == null || v.isEmpty) ? "Enter password" : null,
                   ),
-                  const SizedBox(height: 16),
+
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordPage(),
+                        ),
+                      );
+                    },
+                    child: const Text('Forgot password?'),
+                  ),
+
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(

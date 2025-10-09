@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../app_state.dart';
-import '../screens/LoginPage.dart';
+import 'LoginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Register page
 class RegisterPage extends StatefulWidget {
@@ -24,29 +25,34 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
-    final app = AppState.of(context);
-    final err = app.registerUser(
-      username: _username.text,
-      email: _email.text,
-      password: _password.text,
-    );
-    if (err != null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err)));
+
+    final prefs = await SharedPreferences.getInstance();
+
+    final savedEmail = prefs.getString('email');
+    if (savedEmail == _email.text.trim()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('This email is already registered')),
+      );
       return;
     }
+
+    await prefs.setString('username', _username.text.trim());
+    await prefs.setString('email', _email.text.trim());
+    await prefs.setString('password', _password.text);
+
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text("Registration successful")));
-    // After successful register, go to Login and prefill email
+    ).showSnackBar(const SnackBar(content: Text('Registration successful!')));
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder:
             (_) => LoginPage(
-              prefilledEmail: _email.text,
-              prefilledName: _username.text,
+              prefilledEmail: _email.text.trim(),
+              prefilledName: _username.text.trim(),
             ),
       ),
     );
