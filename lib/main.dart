@@ -17,6 +17,7 @@ import 'widgets/listTile.dart';
 import 'widgets/exercise_1.dart';
 import 'widgets/stack.dart';
 import 'widgets/wrap.dart';
+import 'widgets/image.dart';
 
 import 'token_api/git.dart';
 import 'public_api/NewsPage.dart';
