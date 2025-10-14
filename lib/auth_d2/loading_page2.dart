@@ -1,15 +1,15 @@
 // loading_screen.dart
 import 'package:flutter/material.dart';
-import 'LoginPage.dart';
+import 'login_page2.dart';
 
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({super.key});
+class LoadingPage2 extends StatefulWidget {
+  const LoadingPage2({super.key});
 
   @override
-  State<LoadingScreen> createState() => _LoadingScreenState();
+  State<LoadingPage2> createState() => _LoadingScreenState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> {
+class _LoadingScreenState extends State<LoadingPage2> {
   @override
   void initState() {
     super.initState();
@@ -17,7 +17,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginPage()),
+        MaterialPageRoute(builder: (_) => const LoginPage2()),
       );
     });
   }

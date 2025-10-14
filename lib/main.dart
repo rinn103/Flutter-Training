@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'auth/LoginPage.dart';
-import 'auth/loading_screen.dart';
+
+import 'auth_d2/home_page2.dart';
+import 'auth_d2/login_page2.dart';
+import 'auth_d2/register_page2.dart';
+import 'auth_d2/loading_page2.dart';
+
+import 'auth_sharedpreferences/LoginPage.dart';
+import 'auth_sharedpreferences/loading_screen.dart';
 
 import 'widgets/center_text.dart';
 import 'widgets/column.dart';
@@ -15,6 +21,8 @@ import 'widgets/wrap.dart';
 import 'token_api/git.dart';
 import 'public_api/NewsPage.dart';
 
+import 'demo.dart';
+
 void main() => runApp(const App());
 
 class App extends StatelessWidget {
@@ -26,7 +34,7 @@ class App extends StatelessWidget {
       title: 'Auth Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
-      home: const LoadingScreen(),
+      home: const LoadingPage2(),
     );
   }
 }

@@ -1,7 +1,7 @@
 // forgot_password_page.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'LoginPage.dart';
+import '../auth_sharedpreferences/LoginPage.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});

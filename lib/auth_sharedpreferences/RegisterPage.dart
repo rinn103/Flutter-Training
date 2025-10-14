@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'LoginPage.dart';
+import '../auth_sharedpreferences/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Register page
@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  // sharepreferences
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
 

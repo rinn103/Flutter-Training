@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../auth/HomePage.dart';
-import '../auth/ForgotPasswordPage.dart';
-import '../auth/RegisterPage.dart';
+import 'home_page2.dart';
+import 'register_page2.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage2 extends StatefulWidget {
   final String? prefilledEmail;
   final String? prefilledName;
 
-  const LoginPage({super.key, this.prefilledEmail, this.prefilledName});
+  const LoginPage2({super.key, this.prefilledEmail, this.prefilledName});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage2> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage2> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
-  bool _loading = false;
 
   @override
   void initState() {
@@ -28,35 +26,28 @@ class _LoginPageState extends State<LoginPage> {
     _email.text = widget.prefilledEmail ?? '';
   }
 
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
   Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
 
-    setState(() => _loading = true);
+    final name = widget.prefilledName ?? 'User';
 
-    final prefs = await SharedPreferences.getInstance();
-    final savedEmail = prefs.getString('email');
-    final savedPassword = prefs.getString('password');
-    final savedUsername = prefs.getString('username');
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Login successful")));
 
-    await Future.delayed(const Duration(seconds: 1));
-
-    if (_email.text.trim() == savedEmail && _password.text == savedPassword) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Login successful!')));
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => HomePage(username: savedUsername ?? 'User'),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Invalid email or password')),
-      );
-    }
-    setState(() => _loading = false);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HomePage2(username: name, email: _email.text.trim()),
+      ),
+    );
   }
 
   @override
@@ -136,19 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                         (v) =>
                             (v == null || v.isEmpty) ? "Enter password" : null,
                   ),
-
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const ForgotPasswordPage(),
-                        ),
-                      );
-                    },
-                    child: const Text('Forgot password?'),
-                  ),
-
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -177,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => const RegisterPage()),
+                        MaterialPageRoute(
+                          builder: (_) => const RegisterPage2(),
+                        ),
                       );
                     },
                     child: Text(
