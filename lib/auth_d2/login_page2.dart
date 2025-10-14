@@ -52,7 +52,6 @@ class _LoginPageState extends State<LoginPage2> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -76,7 +75,7 @@ class _LoginPageState extends State<LoginPage2> {
           children: [
             const SizedBox(height: 30),
             Image.asset(
-              'lib/assets/fgv_logo.png', //  your image here
+              'lib/assets/fgv_logo.png',
               height: 180,
               fit: BoxFit.contain,
             ),
@@ -98,6 +97,7 @@ class _LoginPageState extends State<LoginPage2> {
             //   repeat: false,
             // ),
             const SizedBox(height: 20),
+
             Form(
               key: _form,
               child: Column(
@@ -161,12 +161,7 @@ class _LoginPageState extends State<LoginPage2> {
                         ),
                       );
                     },
-                    child: Text(
-                      "No account? Register",
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
+                    child: Text("No account? Register"),
                   ),
                 ],
               ),

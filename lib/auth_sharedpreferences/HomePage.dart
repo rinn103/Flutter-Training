@@ -106,20 +106,20 @@ class HomePage extends StatelessWidget {
             // delete account
             SizedBox(
               width: double.infinity,
-              // child: ElevatedButton.icon(
-              //   onPressed: () => _confirmDelete(context),
-              //   icon: const Icon(Icons.delete_forever),
-              //   label: const Text('Delete account'),
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Colors.red,
-              //     foregroundColor: Colors.white,
-              //     padding: const EdgeInsets.symmetric(vertical: 14),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(12),
-              //     ),
-              //     elevation: 2,
-              //   ),
-              // ),
+              child: ElevatedButton.icon(
+                onPressed: () => _confirmDelete(context),
+                icon: const Icon(Icons.delete_forever),
+                label: const Text('Delete account'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 2,
+                ),
+              ),
             ),
             // news public API
             const SizedBox(height: 20),

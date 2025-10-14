@@ -1,6 +1,7 @@
 // loading_screen.dart
 import 'package:flutter/material.dart';
 import 'login_page2.dart';
+import 'package:lottie/lottie.dart';
 
 class LoadingPage2 extends StatefulWidget {
   const LoadingPage2({super.key});
@@ -24,6 +25,16 @@ class _LoadingScreenState extends State<LoadingPage2> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+        // child: Lottie.asset(
+        //   'lib/assets/lottie/test.json',
+        //   width: 140,
+        //   repeat: true,
+        //   animate: true,
+        // ),
+      ),
+    );
   }
 }
