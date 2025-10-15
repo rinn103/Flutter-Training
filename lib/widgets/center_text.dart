@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyCenterTextApp());
-}
-
 class MyCenterTextApp extends StatelessWidget {
   const MyCenterTextApp({super.key});
 

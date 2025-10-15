@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyContainerApp());
-}
-
 class MyContainerApp extends StatelessWidget {
   const MyContainerApp({super.key});
 

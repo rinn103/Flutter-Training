@@ -35,7 +35,7 @@ class App extends StatelessWidget {
       title: 'Auth Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
-      home: const LoadingPage2(),
+      home: const LoginPage(),
     );
   }
 }

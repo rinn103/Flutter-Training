@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyIconApp());
-}
-
 class MyIconApp extends StatelessWidget {
   const MyIconApp({super.key});
 

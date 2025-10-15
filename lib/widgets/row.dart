@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyRowApp());
-}
-
 class MyRowApp extends StatelessWidget {
   const MyRowApp({super.key});
 

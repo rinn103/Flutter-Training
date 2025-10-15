@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'login_page2.dart';
 
-class RegisterPage2 extends StatefulWidget {
-  const RegisterPage2({super.key});
+class Reg_skeleton extends StatefulWidget {
+  const Reg_skeleton({super.key});
   @override
-  State<RegisterPage2> createState() => _RegisterPage2State();
+  State<Reg_skeleton> createState() => _RegisterPage2State();
 }
 
-class _RegisterPage2State extends State<RegisterPage2> {
+class _RegisterPage2State extends State<Reg_skeleton> {
   final _form = GlobalKey<FormState>();
   final _username = TextEditingController();
   final _email = TextEditingController();

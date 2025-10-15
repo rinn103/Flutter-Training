@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyColumnApp());
-}
-
 class MyColumnApp extends StatelessWidget {
   const MyColumnApp({super.key});
 

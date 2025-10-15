@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyListTileApp());
-}
-
 class MyListTileApp extends StatelessWidget {
   const MyListTileApp({super.key});
 

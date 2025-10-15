@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyWrapApp());
-}
-
 class MyWrapApp extends StatelessWidget {
   const MyWrapApp({super.key});
 
