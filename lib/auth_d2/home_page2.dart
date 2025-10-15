@@ -49,7 +49,6 @@ class HomePage2 extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center, // center vertically
             crossAxisAlignment:
                 CrossAxisAlignment.center, // center horizontally

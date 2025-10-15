@@ -2,20 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class MyGitApp extends StatelessWidget {
-  const MyGitApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'GitHub API Token Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const GitHubRepoPage(),
-    );
-  }
-}
-
 class GitHubRepoPage extends StatefulWidget {
   const GitHubRepoPage({super.key});
 
@@ -24,8 +10,6 @@ class GitHubRepoPage extends StatefulWidget {
 }
 
 class _GitHubRepoPageState extends State<GitHubRepoPage> {
-  // final String token =
-  //     'token ur token';
   List<dynamic> repos = [];
   bool loading = true;
   String? error;
@@ -41,7 +25,7 @@ class _GitHubRepoPageState extends State<GitHubRepoPage> {
       final response = await http.get(
         Uri.parse('https://api.github.com/user/repos'),
         headers: {
-          'Authorization': 'token ghp_urtoken',
+          'Authorization': 'token ghp_UR_TOKEN',
           'Accept': 'application/vnd.github+json',
         },
       );

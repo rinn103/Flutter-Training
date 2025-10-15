@@ -20,39 +20,22 @@ class _NewsPageState extends State<NewsPage> {
     _fetchNews();
   }
 
-  static const String _apiKey =
-      'c0652d76d56d43ada90a841804f0a430'; // <-- Replace this
-  static const String _base = 'https://newsapi.org/v2/top-headlines';
-
   Future<void> _fetchNews() async {
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
+    const apiKey = 'c0652d76d56d43ada90a841804f0a430'; // replace with your key
+    final url =
+        'https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=$apiKey';
 
-    final uri = Uri.parse(
-      '$_base?country=us&category=technology&apiKey=$_apiKey',
-    );
-    try {
-      final resp = await http.get(uri).timeout(const Duration(seconds: 15));
+    final response = await http.get(Uri.parse(url));
 
-      if (resp.statusCode == 200) {
-        final decoded = json.decode(resp.body);
-        final List data = decoded['articles'] ?? [];
-        setState(() {
-          _articles = data;
-          _loading = false;
-        });
-      } else {
-        setState(() {
-          _error =
-              'HTTP ${resp.statusCode}: ${resp.reasonPhrase}\n${resp.body}';
-          _loading = false;
-        });
-      }
-    } catch (e) {
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
       setState(() {
-        _error = e.toString();
+        _articles = data['articles'];
+        _loading = false;
+      });
+    } else {
+      setState(() {
+        _articles = [];
         _loading = false;
       });
     }
@@ -62,55 +45,41 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Top Tech News",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Tech News'),
         backgroundColor: Colors.orange,
       ),
       body:
           _loading
               ? const Center(child: CircularProgressIndicator())
-              : _error != null
-              ? Center(child: Text(_error!))
               : ListView.builder(
                 itemCount: _articles.length,
                 itemBuilder: (context, index) {
-                  final article = _articles[index];
-                  final image = article['urlToImage'];
-
-                  return Card(
-                    margin: const EdgeInsets.all(8),
-                    child: ListTile(
-                      leading:
-                          image != null
-                              ? Image.network(
-                                image,
-                                width: 60,
-                                height: 60,
-                                fit: BoxFit.cover,
-                              )
-                              : const Icon(Icons.article, size: 40),
-                      title: Text(article['title'] ?? 'No title'),
-                      subtitle: Text(article['source']?['name'] ?? 'Unknown'),
-                      onTap:
-                          () => showDialog(
-                            context: context,
-                            builder:
-                                (_) => AlertDialog(
-                                  title: Text(article['title'] ?? ''),
-                                  content: Text(
-                                    article['description'] ?? 'No details',
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text('Close'),
-                                    ),
-                                  ],
+                  final news = _articles[index];
+                  return ListTile(
+                    leading:
+                        news['urlToImage'] != null
+                            ? Image.network(news['urlToImage'], width: 60)
+                            : const Icon(Icons.article),
+                    title: Text(news['title'] ?? 'No title'),
+                    subtitle: Text(news['source']?['name'] ?? 'Unknown'),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder:
+                            (_) => AlertDialog(
+                              title: Text(news['title'] ?? ''),
+                              content: Text(
+                                news['description'] ?? 'No description',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('Close'),
                                 ),
-                          ),
-                    ),
+                              ],
+                            ),
+                      );
+                    },
                   );
                 },
               ),
