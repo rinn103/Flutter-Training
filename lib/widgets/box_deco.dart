@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 
-class MyContainerApp extends StatelessWidget {
-  const MyContainerApp({super.key});
+class BoxDecorationDemo extends StatelessWidget {
+  const BoxDecorationDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Container Demo',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Container Demo')),
+        backgroundColor: Colors.grey[200],
         body: Center(
           child: Container(
             width: 200,
             height: 200,
-            padding: const EdgeInsets.all(20),
-            margin: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.teal,
+              gradient: const LinearGradient(
+                colors: [Colors.teal, Colors.greenAccent],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black54, width: 2),
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
                   blurRadius: 10,
-                  spreadRadius: 2,
-                  offset: Offset(5, 5),
+                  offset: Offset(4, 4),
                 ),
               ],
             ),

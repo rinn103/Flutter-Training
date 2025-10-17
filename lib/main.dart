@@ -18,6 +18,7 @@ import 'widgets/exercise_1.dart';
 import 'widgets/stack.dart';
 import 'widgets/wrap.dart';
 import 'widgets/image.dart';
+import 'widgets/widget_menu.dart';
 
 import 'token_api/git.dart';
 import 'public_api/NewsPage.dart';
@@ -35,7 +36,7 @@ class App extends StatelessWidget {
       title: 'Auth Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
-      home: const MyImageApp(),
+      home: const MyWidgetApp(),
     );
   }
 }

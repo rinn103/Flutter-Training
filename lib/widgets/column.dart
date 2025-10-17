@@ -9,6 +9,7 @@ class MyColumnApp extends StatelessWidget {
       title: 'Column Demo',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(title: const Text('Column Demo')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center, // center vertically

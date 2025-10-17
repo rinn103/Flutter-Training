@@ -9,7 +9,7 @@ class MyImageApp extends StatelessWidget {
       title: 'Image Demo',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Flutter Image Example')),
+        appBar: AppBar(title: const Text('Flutter Image Demo')),
         body: SingleChildScrollView(
           child: Center(
             child: Column(

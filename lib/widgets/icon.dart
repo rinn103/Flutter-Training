@@ -9,7 +9,7 @@ class MyIconApp extends StatelessWidget {
       title: 'Stack Demo',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: const Text("Stack Demo")),
+        appBar: AppBar(title: const Text("Icon Demo")),
         body: Center(
           child: Stack(
             alignment: Alignment.center,
