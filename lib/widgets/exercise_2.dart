@@ -7,7 +7,7 @@ class MyInfoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Information List',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, // hide debug banner
       home: Scaffold(
         appBar: AppBar(title: const Text("Contacts")),
         body: Container(

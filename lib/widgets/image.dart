@@ -28,10 +28,10 @@ class MyImageApp extends StatelessWidget {
                 Image.network(
                   'https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_16x9.jpg?w=1200',
                   width: 150,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const CircularProgressIndicator();
-                  },
+                  // loadingBuilder: (context, child, loadingProgress) {
+                  //   if (loadingProgress == null) return child;
+                  //   return const CircularProgressIndicator();
+                  // },
                 ),
               ],
             ),

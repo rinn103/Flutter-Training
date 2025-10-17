@@ -38,9 +38,9 @@ class _LoginPageState extends State<LoginPage2> {
 
     final name = widget.prefilledName ?? 'User';
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text("Login successful")));
+    // ScaffoldMessenger.of(
+    //   context,
+    // ).showSnackBar(const SnackBar(content: Text("Login successful")));
 
     Navigator.pushReplacement(
       context,

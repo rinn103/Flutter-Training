@@ -14,7 +14,7 @@ class MyListTileApp extends StatelessWidget {
           children: const [
             ListTile(
               leading: Icon(Icons.person, color: Colors.blue),
-              title: Text("Izzah"),
+              title: Text("John Doe"),
               subtitle: Text("Flutter Student"),
               trailing: Icon(Icons.phone, color: Colors.green),
             ),
